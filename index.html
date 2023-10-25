@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CRUD operations</title>
+    <link rel="shortcut icon" href="CRUD.jpeg" type="image/x-icon">
+    <!-- Bootstrap link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- link css -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn-addUser btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        New User<i class="ms-1 fa-solid fa-user-plus"></i></button>
+
+    <!-- Modal Btn -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal title -->
+                <div class="modal-header bg-primary">
+                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Fill the Form</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- modal-content -->
+                <div class="modal-body row">
+                    <div class="col-4 text-center border-end border-3 border-primary position-relative">
+                        <div class="imgModalBox ">
+                            <img src="user.png" class="imgModal rounded-circle" alt="">
+                        </div>
+                        <div class=" overlay-img position-absolute rounded-circle opacity-75">
+                            <label class="custom-file-upload">
+                                <input class="imgInput" type="file" required /><i
+                                    class="addImgBtn fa-solid fa-plus mt-4 p-3 fs-5 fw-bold btn text-white "></i>
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group mt-2 position-relative">
+                            <label class="">Name <span class="text-danger">*</span></label>
+                            <input type="text" required
+                                class="userData border-0 outline-none w-75 border-bottom mb-3 ms-1">
+                            <label class="ageInput">Age <span class="text-danger">*</span></label>
+                            <input type="number" required min="0" value="10"
+                                class="userData border-0 outline-none w-75 border-bottom mb-3 ms-1">
+                            <label class="">City<span class="text-danger">*</span></label>
+                            <input type="text" required
+                                class="userData border-0 outline-none w-75 border-bottom mb-3 ms-1">
+                            <label class="">Email<span class="text-danger">*</span></label>
+                            <input type="email" required
+                                class="userData border-0 outline-none w-75 border-bottom mb-3 ms-1">
+                            <label class="">Phone<span class="text-danger">*</span></label>
+                            <input type="text" required
+                                class="userData border-0 outline-none w-75 border-bottom mb-3 ms-1">
+                            <label class="">Position<span class="text-danger">*</span></label>
+                            <input type="text" required
+                                class="userData border-0 outline-none w-75 border-bottom mb-3 ms-1">
+                            <label class="">Start Date<span class="text-danger">*</span></label>
+                            <input type="text" required readonly
+                                class="userData inputFullDate border-0 outline-none border-bottom mb-3 ms-1"
+                                placeholder="dd/mm/yyyy"><i class="calendarIcon fa-regular fa-calendar-days "></i>
+                            <!-- calendar -->
+                            <div class="wrapper position-absolute d-none">
+                                <header>
+                                    <p class="ms-4 mt-3 current-date"></p>
+                                    <div class="icons">
+                                        <span id="prev" class="material-symbols-rounded"><i
+                                                class="fa-solid fa-arrow-left"></i></span>
+                                        <span id="next" class="material-symbols-rounded"><i
+                                                class="fa-solid fa-arrow-right"></i></span>
+                                    </div>
+                                </header>
+                                <div class="calendar">
+                                    <ul class="weeks">
+                                        <li>Sun</li>
+                                        <li>Mon</li>
+                                        <li>Tue</li>
+                                        <li>Wed</li>
+                                        <li>Thu</li>
+                                        <li>Fri</li>
+                                        <li>Sat</li>
+                                    </ul>
+                                    <ul class="days"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-submit btn btn-primary">Submit</button>
+                    <button type="button" class="btnUpdate btn btn-success d-none" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Table content -->
+    <table class="table table-hover table-bordered">
+        <thead class="table-header">
+            <tr class="text-center table-header">
+                <th scope="col">S.No</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">City</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Position</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <!-- User info -->
+        <tbody class="tabelBody">
+
+        </tbody>
+    </table>
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
