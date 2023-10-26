@@ -25,7 +25,7 @@
 
 .overlay-img {
     height: 0;
-    width: 90%;
+    width: 86%;
     top: 0%;
     left: 8%;
     background: linear-gradient(#ffff 50%, #252525 50%);
@@ -144,4 +144,40 @@ header .current-date {
 
 .days li:not(.active):hover::before {
     background: #f2f2f2;
+}
+
+@media only screen and (min-width: 360px) and (max-width: 430px) {
+    .imgModal {
+        height: 100px;
+    }
+
+    .overlay-img {
+        left: 11%;
+        width: 78%;
+
+    }
+
+    .overlay-img:hover {
+        height: 25%;
+    }
+
+    .userData {
+        width: 83% !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .wrapper {
+        top: 38%;
+
+    }
+
+    .calendar .weeks li {
+        font-size: 0.6rem;
+
+    }
+
+    .calendar .days li {
+        font-size: 0.6rem;
+    }
+
 }
