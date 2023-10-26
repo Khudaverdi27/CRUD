@@ -27,31 +27,21 @@ function imgToModal() {
         }
     }
 }
-// class Human {
-//     constructor(img, userName, userAge, userCity, userMail, userPhone, userPosition, startTime) {
-//         this.profil = img;
-//         this.name = userName;
-//         this.age = userAge;
-//         this.city = userCity;
-//         this.email = userMail;
-//         this.phone = userPhone;
-//         this.position = userPosition;
-//         this.startDate = startTime;
-//     }
-// }
+
+// from modal to table
 class Human {
     constructor(img, name, age, city, email, phone, position, startDate) {
         Object.assign(this, { img, name, age, city, email, phone, position, startDate });
     }
 }
 
+// table row
 let count = 1
-
 class UI {
     addToUi(data) {
 
         tabelBody.innerHTML += `<tr class="text-center tableContent">
-        <th class="" scope="row">${count++}</th>
+        <th class="counter" scope="row">${count++}</th>
         <td><img src="${data.img}" class="imgInTable" alt=""></td>
         <td>${data.name}</td>
         <td>${data.age}</td>
@@ -70,50 +60,25 @@ class UI {
                 <i class=" fa-solid fa-trash-can"></i></button>
         </td>
     </tr>`
-        const imgIntable = document.querySelector(".imgInTable")
+
         const btnWatch = document.querySelectorAll(".btn-watch")
         const btnEdit = document.querySelectorAll(".btn-edit")
         const btnDelete = document.querySelectorAll(".btn-delete")
-
-
-
-
-        lookInfo(btnWatch, btnEdit, btnDelete, imgIntable)
+        // actions buttons 
+        lookInfo(btnWatch, btnEdit, btnDelete)
     }
 
 
 }
 
-// function submitData() {
 
-//     let userName = userInfo[0].value;
-//     let userAge = userInfo[1].value;
-//     let userCity = userInfo[2].value;
-//     let userMail = userInfo[3].value;
-//     let userPhone = userInfo[4].value;
-//     let userPosition = userInfo[5].value;
-//     let startTime = userInfo[6].value;
-//     let img = imgModal.src
-
-//     if (userName != "" && userAge != "" && userCity != "" && userMail != "" && userPhone != "" && userPosition != "" && startTime != "") {
-
-//         let human = new Human(img, userName, userAge, userCity, userMail, userPhone, userPosition, startTime)
-
-//         let ui = new UI
-//         ui.addToUi(human)
-//         btnSubmit.setAttribute("data-bs-dismiss", "modal")
-//     } else {
-//         modalTitle.textContent = "Please fill every field area"
-//         modalTitle.parentElement.classList.add("bg-danger")
-//     }
-// }
 
 // modal datas show UI
 function submitData() {
     const fields = [
         'userName', 'userAge', 'userCity', 'userMail', 'userPhone', 'userPosition', 'startTime'
     ];
-
+    // find every value in the input
     const values = fields.map(field => userInfo[fields.indexOf(field)].value);
     const img = imgModal.src;
 
@@ -130,31 +95,27 @@ function submitData() {
 }
 
 // CRUD buttons events
-function lookInfo(btnWatch, btnEdit, btnDelete, imgInTable) {
+function lookInfo(btnWatch, btnEdit, btnDelete) {
     // For each button, add access to the data in that row
     btnWatch.forEach(button => {
         button.addEventListener('click', () => {
 
             const row = button.closest('tr'); // closest tr element
             const dataCells = Array.from(row.querySelectorAll('td'));
-
+            // uneditable fields
             modalTitle.textContent = "User Info";
+            btnUpdate.classList.replace("d-block", "d-none")
             btnSubmit.style.display = "none";
             addImgIcon.style.display = "none";
             calendarIcon.style.display = "none";
             imgInput.disabled = true;
-
             userInfo.forEach(noEditModal => noEditModal.disabled = true);
+            // from table to modal
             for (let i = 0; i < 7; i++) {
+                imgModal.src = dataCells[0].querySelector('img').src
                 userInfo[i].value = dataCells[i + 1].textContent;
             }
-            // userInfo[0].value = dataCells[1].textContent;
-            // userInfo[1].value = dataCells[2].textContent;
-            // userInfo[2].value = dataCells[3].textContent;
-            // userInfo[3].value = dataCells[4].textContent;
-            // userInfo[4].value = dataCells[5].textContent;
-            // userInfo[5].value = dataCells[6].textContent;
-            // userInfo[6].value = dataCells[7].textContent;
+
         });
     });
 
@@ -168,25 +129,26 @@ function lookInfo(btnWatch, btnEdit, btnDelete, imgInTable) {
 
             const row = button.closest('tr'); // closest tr element
             const dataCells = Array.from(row.querySelectorAll('td'));
-
+            // editable fields
             calendarIcon.style.display = "inline-block"
             btnSubmit.style.display = "none";
             btnUpdate.classList.replace("d-none", "d-block")
             imgInput.disabled = false;
-
             addImgIcon.style.display = "block"
-
             userInfo.forEach(EditModal => EditModal.disabled = false);
+            imgModal.src = dataCells[0].querySelector('img').src
+
             btnUpdate.addEventListener("click", () => {
-                imgInTable.src = imgModal.src  //edit
                 for (let i = 0; i < 7; i++) {
+                    dataCells[0].querySelector('img').src = imgModal.src
                     dataCells[i + 1].textContent = userInfo[i].value
                 }
+
             })
 
         });
     });
-
+    // delete buttons
     btnDelete.forEach((btn) => {
         btn.addEventListener("click", () => {
             btn.parentElement.parentElement.remove()
@@ -195,10 +157,10 @@ function lookInfo(btnWatch, btnEdit, btnDelete, imgInTable) {
 
 
 }
-
+// add button refreshing
 btnAddUser.addEventListener("click", () => {
-
     userInfo.forEach((letEdit) => {
+        imgModal.src = 'user.png'
         letEdit.value = ""
         calendarIcon.style.display = "inline-block"
         btnSubmit.style.display = "block"
@@ -210,38 +172,7 @@ btnAddUser.addEventListener("click", () => {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Calendar operations
 const daysTag = document.querySelector(".days"),
     currentDate = document.querySelector(".current-date"),
     prevNextIcon = document.querySelectorAll(".icons span"),
