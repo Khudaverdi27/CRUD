@@ -50,7 +50,7 @@ class UI {
         <td>${data.phone}</td>
         <td>${data.position}</td>
         <td>${data.startDate}</td>
-        <td><button class=" btn-watch btn btn-success" data-bs-toggle="modal"
+        <td class="buttons"><button class=" btn-watch btn btn-success" data-bs-toggle="modal"
         data-bs-target="#exampleModal">
                 <i class=" fa-solid fa-eye"></i></button>
             <button class="btn-edit btn btn-primary" data-bs-toggle="modal"
@@ -130,6 +130,7 @@ function lookInfo(btnWatch, btnEdit, btnDelete) {
             const row = button.closest('tr'); // closest tr element
             const dataCells = Array.from(row.querySelectorAll('td'));
             // editable fields
+            modalTitle.textContent = "Edit the Form"
             calendarIcon.style.display = "inline-block"
             btnSubmit.style.display = "none";
             btnUpdate.classList.replace("d-none", "d-block")
@@ -159,15 +160,17 @@ function lookInfo(btnWatch, btnEdit, btnDelete) {
 }
 // add button refreshing
 btnAddUser.addEventListener("click", () => {
+    btnSubmit.removeAttribute("data-bs-dismiss")
+    calendarIcon.style.display = "inline-block"
+    btnSubmit.style.display = "block"
+    addImgIcon.style.display = "block"
+    modalTitle.textContent = "Fill the Form"
+    btnUpdate.classList.replace("d-block", "d-none")
+    imgModal.src = 'user.png'
+    imgInput.disabled = false
     userInfo.forEach((letEdit) => {
-        imgModal.src = 'user.png'
         letEdit.value = ""
-        calendarIcon.style.display = "inline-block"
-        btnSubmit.style.display = "block"
-        addImgIcon.style.display = "block"
-        btnUpdate.classList.replace("d-block", "d-none")
         letEdit.disabled = false;
-        imgInput.disabled = false
     })
 })
 
